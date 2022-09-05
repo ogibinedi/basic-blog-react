@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #68b35c;
+    .brand {
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0;
+    }
+    .menu-item {
+        display: flex;
+        font-size: 18px;
+        color: white;
+        justify-content: space-between;
+        cursor: pointer;
+        .item-link {
+            margin: 5px;
+        }
+    }
+}

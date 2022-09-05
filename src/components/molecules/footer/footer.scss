@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    height: 100px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 20px 40px;
+    .logo {
+        width: 75px;
+        height: 75px;
+    }
+    .wrapper {
+        display: flex;
+        justify-content: space-between;
+        .social-wrapper {
+            background-color: white;
+            padding: 2px 2px 0px 0px;
+            justify-content: center;
+            align-items: center;
+            margin: 0 8px;
+            border-radius: 30%;
+        }
+    }
+    .copyright {
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+    }
+}
