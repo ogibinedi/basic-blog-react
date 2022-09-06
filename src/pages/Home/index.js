@@ -1,11 +1,13 @@
 import React from 'react';
 import { BlogItem, Button, Gap } from '../../components';
 import './home.scss';
+import { useHistory } from 'react-router-dom';
 const Home = () => {
+  const history = useHistory();
   return (
     <div className="homepage-wrapper">
         <div className='create-wrapper'>
-            <Button title="create blog" />
+            <Button title="create blog" onClick={() => history.push('/create-blog') } />
         </div>
         <Gap height={20} />
         <div className="content-wrapper">

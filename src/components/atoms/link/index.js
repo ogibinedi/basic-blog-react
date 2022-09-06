@@ -3,7 +3,7 @@ import './link.scss';
 
 const LinkLabel = ({title, onClick}) => {
   return (
-    <p className='link' onClick={onClick}>{title}</p>
+    <span className='link' onClick={onClick}>{title}</span>
   );
 };
 
