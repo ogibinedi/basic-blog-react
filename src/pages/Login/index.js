@@ -19,7 +19,7 @@ const Login = () => {
             <Gap height={20} />
             <Button title="Register" onClick={() => history.push('/')}/>
             <Gap height={100} />
-            <LinkLabel title="Belum punya akun? Register disini." onClick={() => history.push('/register')} />
+            <LinkLabel title="Belum punya akun? Register disini." onClick={() => history.push('/register')} style={{ color: "#333 !important"}} />
         </div>
     </div>
   );
