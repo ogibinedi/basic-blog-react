@@ -1,6 +1,6 @@
 import React from 'react';
 import { LogBg } from '../../assets';
-import '../Register/register.scss';
+// import '../Register/register.scss';
 import {Button, Gap, Input, LinkLabel} from '../../components';
 import { useHistory } from 'react-router-dom';
 

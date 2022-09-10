@@ -1,10 +1,11 @@
 import React from 'react';
 import './textarea.scss';
 
-const TextArea = ({ ...rest }) => {
+const TextArea = ({label, ...rest }) => {
   return (
-    <div>
-        <textarea className='text-area' {...rest}></textarea>
+    <div className='mb-3'>
+        <label htmlFor="ControlInput" className='form-label'>{label}</label>
+        <textarea className='form-control' rows={3} {...rest}></textarea>
     </div>
   )
 }

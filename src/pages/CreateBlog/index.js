@@ -6,6 +6,9 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { postToAPI, setForm, setImgPreview, updateToAPI } from '../../config/redux/action';
 import axios from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const CreateBlog = (props) => {
   const { form, imgPreview } = useSelector(state => state.createBlogReducer);
@@ -13,17 +16,31 @@ const CreateBlog = (props) => {
   const dispatch = useDispatch();
   const {title, body } = form;
   const history = useHistory();
+  const notify = () => {
+    // set 3 second
+    if (isUpdate){
+        toast.success('The update has succeed.', {
+            position: toast.POSITION.BOTTOM_LEFT,
+            autoClose: 3000
+        })
+    }else {
+        toast.success('New post has added', {
+            position: toast.POSITION.BOTTOM_LEFT,
+            autoClose: 3000
+        })
+    }
+  }
 
   useEffect(() => {
     const id = props.match.params.id;
     if (id) {
         setIsUpdate(true);
-        axios.get(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`)
+        axios.get(`http://localhost:5000/v1/blog/post/${id}`)
         .then(res => {
             const data = res.data.data;
             dispatch(setForm('title', data.title));
             dispatch(setForm('body', data.body));
-            dispatch(setImgPreview(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/${data.image}`));
+            dispatch(setImgPreview(`http://localhost:5000/${data.image}`));
         })
         .catch(err => console.log('error: ', err))
     }
@@ -33,8 +50,10 @@ const CreateBlog = (props) => {
     const id = props.match.params.id;
     if (isUpdate){
         updateToAPI(form, id)
+        notify()
     } else {
         postToAPI(form);
+        notify();
     }
   }
 
@@ -45,16 +64,19 @@ const CreateBlog = (props) => {
   }
 
   return (
-    <div className='blog-post'>
-        <LinkLabel title="Kembali ke home" onClick={() => history.push('/')} />
-        <p className='label-create-new-blog'>{isUpdate ? 'Update Blog Post' : 'Create New Blog Post'}</p>
-        <Input label="Post title" value={title} onChange={(e) => dispatch(setForm('title', e.target.value))}/>
-        <p>Upload Image</p>
-        <Upload onChange={(e) => onImageUpload(e)} img={imgPreview} />
-        <TextArea value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
-        <Gap height={20} />
-        <div className="button-save">
-            <Button title={isUpdate ? 'Update' : 'Save'} onClick={onSubmit}/>
+    <div className="container">
+        <ToastContainer />
+        <div className='form-control'>
+            <LinkLabel title="Kembali ke home" onClick={() => history.push('/')} />
+            <p className='label-create-post'>{isUpdate ? 'Update Blog Post' : 'Create New Blog Post'}</p>
+            <Input label="Post title" value={title} onChange={(e) => dispatch(setForm('title', e.target.value))}/>
+            <p>Upload Image</p>
+            <Upload onChange={(e) => onImageUpload(e)} img={imgPreview} />
+            <TextArea value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
+            <Gap height={20} />
+            <div className="button-save">
+                <Button title={isUpdate ? 'Update' : 'Save'} onClick={onSubmit}/>
+            </div>
         </div>
     </div>
   )

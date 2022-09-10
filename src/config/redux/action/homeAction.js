@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const setDataBlog = (page) => (dispatch) => {
-    axios.get(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/posts?page=${page}&perPage=2`)
+    axios.get(`http://localhost:5000/v1/blog/posts?page=${page}&perPage=6`)
     .then(result => {
         const responseAPI = result.data;
         dispatch({type: 'UPDATE_DATA_BLOG', payload: responseAPI.data});

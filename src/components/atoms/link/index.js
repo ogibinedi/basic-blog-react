@@ -3,7 +3,7 @@ import './link.scss';
 
 const LinkLabel = ({title, onClick}) => {
   return (
-    <p className='link' onClick={onClick}>{title}</p>
+    <p className='btn btn-success float-end' onClick={onClick}>{title}</p>
   );
 };
 

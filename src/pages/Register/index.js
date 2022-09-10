@@ -1,6 +1,6 @@
 import React from 'react';
 import { RegBg } from '../../assets';
-import './register.scss';
+// import './register.scss';
 import {Button, Gap, Input, LinkLabel} from '../../components';
 import { useHistory } from 'react-router-dom';
 const Register = () => {

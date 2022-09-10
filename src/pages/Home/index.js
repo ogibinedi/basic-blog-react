@@ -8,7 +8,7 @@ import showFormattedDate from '../../utils/dateformat';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import axios from 'axios';
-import { FaFileAlt } from 'react-icons/fa';
+import { FaFileAlt, FaPlus } from 'react-icons/fa';
 
 const Home = () => {
   const [counter, setCounter] = useState(1)
@@ -38,7 +38,7 @@ const Home = () => {
         {
           label: 'Yes',
           onClick: () => {
-            axios.delete(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`)
+            axios.delete(`http://localhost:5000/v1/blog/post/${id}`)
             .then(res => {
                 dispatch(setDataBlog(counter));
             })
@@ -54,16 +54,14 @@ const Home = () => {
   }
 
   return (
-    <div className="homepage-wrapper">
-        <div className='create-wrapper'>
-            <Button title="create blog" onClick={() => history.push('/create-blog') } />
-        </div>
-        <Gap height={20} />
-        <div className="content-wrapper">
+    <main>
+        <button className='btn btn-success btn-md 'onClick={() => history.push('/create-blog') } style={{ position: 'absolute'}}><FaPlus /> &nbsp; Create Blog </button>
+        <Gap height={50} />
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {dataBlog.length !== 0 ? dataBlog.map(post => (
                 <BlogItem 
                 key={post._id} 
-                image={`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/${post.image}`}
+                image={`http://localhost:5000/${post.image}`}
                 title={post.title}
                 name={post.author.name}
                 date={showFormattedDate(post.createdAt)}
@@ -71,19 +69,19 @@ const Home = () => {
                 _id={post._id}
                 onDelete={confirmDelete}
                  />
-            )): <div className='empty-post'>
-                    <span className='icon'><FaFileAlt size={100} /></span>
-                    <h3 className='icon-info'>Belum ada postingan yang bisa ditampilkan. Silahkan buat postingan baru.</h3>
+            )): <div className='container-fluid'>
+                    <span style={{display: 'flex', textAlign: 'center', justifyContent: 'center', alignItem: 'center', margin: 'auto'}}><FaFileAlt size={100} color='grey' /></span>
+                    <h3 style={{ color: 'grey', textAlign: 'center', }}>Belum ada postingan yang bisa ditampilkan. Silahkan buat postingan baru.</h3>
                 </div>}
         </div>
-        <div className='pagination'>
+        <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', marginTop: '100px'}}>
             <Button title="Previous" onClick={prev}/>
             <Gap width={20} />
             <p className='text-page'>{page.currentPage + "/" + page.totalPage}</p>
             <Gap width={20} />
             <Button title="Next" onClick={next} />
         </div>
-    </div>
+    </main>
   );
 };
 

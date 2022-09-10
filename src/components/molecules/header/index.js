@@ -1,22 +1,37 @@
 import React from 'react';
-import './header.scss';
-import { FaSignOutAlt, FaReact } from 'react-icons/fa';
-import { LinkLabel } from '../../atoms';
-import { useHistory } from 'react-router-dom';
+import { FaFacebook, FaMailBulk, FaReact, FaTwitter } from 'react-icons/fa';
 const Header = () => {
-  const history = useHistory();
   return (
     <header>
-        <nav className='header'>
-            <div className='brand'>
-                <FaReact size={45} /> &nbsp; <a href="/">My React Blog</a>
+      <div className="collapse bg-dark" id="navbarHeader">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-8 col-md-7 py-4">
+              <h4 className="text-white">Tentang</h4>
+              <p className="text-muted">My MERN Blog adalah aplikasi web sederhana yang dibuat menggunakan javascript modern, nodejs express dan mongodb</p>
             </div>
-            <div className='menu-item'>
-                <span className='item-link'>
-                    <LinkLabel title='Logout' onClick={() => history.push('/login')} />   &nbsp; <FaSignOutAlt color='white' />
-                </span>
+            <div className="col-sm-4 offset-md-1 py-4">
+              <h4 className="text-white">Contact</h4>
+              <ul className="list-unstyled">
+                <li><a href="/" className="text-white" style={{ textDecoration: 'none'}}>Follow saya di &nbsp; <FaTwitter /></a></li>
+                <li><a href="/" className="text-white" style={{ textDecoration: 'none'}}>Like saya &nbsp; <FaFacebook /></a></li>
+                <li><a href="/" className="text-white" style={{ textDecoration: 'none'}}>Email saya di &nbsp; <FaMailBulk/></a></li>
+              </ul>
             </div>
-        </nav>
+          </div>
+        </div>
+      </div>
+      <div className="navbar navbar-dark bg-dark shadow-sm navbar-fixed-top">
+        <div className="container">
+          <a href="/" className="navbar-brand d-flex align-items-center">
+            <FaReact /> &nbsp;
+            <strong>My MERN Blog</strong>
+          </a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+        </div>
+      </div>
     </header>
   );
 };

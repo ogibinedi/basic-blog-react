@@ -3,24 +3,29 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import CreateBlog from '../CreateBlog';
 import DetailBlog from '../DetailBlog';
 import Home from '../Home';
-import { Footer, Header } from '../../components';
-import './mainApp.scss';
+import { Footer, Header, Jumbotron } from '../../components';
+// import './mainApp.scss';
 
 const MainApp = () => {
   return (
-    <div className='main-app-wrapper'>
+    <>
         <Header />
-        <div className="content-wrapper">
-            <Router>
-                <Switch>
-                    <Route path="/create-blog/:id?" component={CreateBlog}/>
-                    <Route path="/detail-blog/:id" component={DetailBlog}/>
-                    <Route path="/" component={Home}/>
-                </Switch>
-            </Router>
-        </div>
+        <main>
+        <Jumbotron />
+        <Router>
+            <Switch>
+                <Route path="/create-blog/:id?" component={CreateBlog}/>
+                <Route path="/detail-blog/:id" component={DetailBlog}/>
+                <div className='album py-5 bg-light'>
+                    <div className='container'>
+                        <Route path="/" component={Home}/>
+                    </div>
+                </div>
+            </Switch>
+        </Router>
+        </main>
         <Footer />
-    </div>
+    </>
   )
 }
 

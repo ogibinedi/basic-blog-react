@@ -3,9 +3,9 @@ import './input.scss';
 const Input = ({label, ...rest}) => {
   return (
     <>
-        <div className='input-wrapper'>
-            <label htmlFor="label input" className='label'>{label}</label>
-            <input className='input' {...rest} />
+        <div className='mb-3'>
+            <label htmlFor="ControlInput" className='form-label'>{label}</label>
+            <input className='form-control' {...rest} />
         </div>
     </>
   )
