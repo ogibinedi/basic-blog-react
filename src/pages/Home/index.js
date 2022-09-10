@@ -38,9 +38,8 @@ const Home = () => {
         {
           label: 'Yes',
           onClick: () => {
-            axios.delete(`http://localhost:5000/v1/blog/post/${id}`)
+            axios.delete(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`)
             .then(res => {
-                console.log('success delete: ', res.data);
                 dispatch(setDataBlog(counter));
             })
             .catch(err => console.log('err: ', err));
@@ -64,7 +63,7 @@ const Home = () => {
             {dataBlog.length !== 0 ? dataBlog.map(post => (
                 <BlogItem 
                 key={post._id} 
-                image={`http://localhost:5000/${post.image}`}
+                image={`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/${post.image}`}
                 title={post.title}
                 name={post.author.name}
                 date={showFormattedDate(post.createdAt)}

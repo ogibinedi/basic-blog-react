@@ -9,7 +9,7 @@ const DetailBlog = (props) => {
   const [dataPost, setDataPost] = useState({});
   useEffect(() => {
     const id = props.match.params.id;
-    axios.get(`http://localhost:5000/v1/blog/post/${id}`)
+    axios.get(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`)
     .then(res => {
         setDataPost(res.data.data);
     })
@@ -19,7 +19,7 @@ const DetailBlog = (props) => {
   if (dataPost.author) {
     return (
         <div className='detail-page'>
-            <img className='content-image' src={`http://localhost:5000/${dataPost.image}`} alt="detail-post" />
+            <img className='content-image' src={`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/${dataPost.image}`} alt="detail-post" />
             <p className='content-author'>{dataPost.author.name} - {showFormattedDate(dataPost.createdAt)}</p>
             <p content-body>{dataPost.body}</p>
             <Gap height={20} />

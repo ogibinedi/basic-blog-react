@@ -18,12 +18,12 @@ const CreateBlog = (props) => {
     const id = props.match.params.id;
     if (id) {
         setIsUpdate(true);
-        axios.get(`http://localhost:5000/v1/blog/post/${id}`)
+        axios.get(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`)
         .then(res => {
             const data = res.data.data;
             dispatch(setForm('title', data.title));
             dispatch(setForm('body', data.body));
-            dispatch(setImgPreview(`http://localhost:5000/${data.image}`));
+            dispatch(setImgPreview(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/${data.image}`));
         })
         .catch(err => console.log('error: ', err))
     }

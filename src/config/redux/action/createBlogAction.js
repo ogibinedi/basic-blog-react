@@ -21,13 +21,14 @@ export const postToAPI = (form) => {
     data.append('body', form.body);
     data.append('image', form.image);
 
-    axios.post('http://localhost:5000/v1/blog/post', data, {
+    axios.post('https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post', data, {
         headers: {
             'content-type': 'multipart/form-data'
         }
     })
     .then(res => {
-        console.log('post success: ', res);
+        // console.log('post success: ', res);
+        console.log('post success: ');
     })
     .catch(err => console.log('error: ', err));
 }
@@ -38,13 +39,13 @@ export const updateToAPI = (form, id) => {
     data.append('body', form.body);
     data.append('image', form.image);
 
-    axios.put(`http://localhost:5000/v1/blog/post/${id}`, data, {
+    axios.put(`https://basic-blog-react-3ro6gbo6a-ogibinedi.vercel.app/v1/blog/post/${id}`, data, {
         headers: {
             'content-type': 'multipart/form-data'
         }
     })
     .then(res => {
-        console.log('update success: ', res);
+        // console.log('update success: ', res);
     })
     .catch(err => console.log('error: ', err));
 }
