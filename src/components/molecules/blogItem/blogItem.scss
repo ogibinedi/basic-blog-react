@@ -12,6 +12,31 @@
     .content-detail {
         margin-top: -16px;
         padding: 16px;
+        .title-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+    
+            .edit-wrapper {
+                display: flex;
+                align-items: center;
+    
+                .edit {
+                    font-weight: bold;
+                    color: lightseagreen;
+                    cursor: pointer;
+                    margin: 0px;
+                    margin-right: 14px;
+                }
+    
+                .delete {
+                    font-weight: bold;
+                    color: rgb(224, 12, 12);
+                    cursor: pointer;
+                    margin: 0px;
+                }
+            }
+        }
         .title {
             margin: 0;
             font-size: 20px;

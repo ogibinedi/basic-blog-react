@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './DetailBlog.scss';
-import {ContentBlog} from '../../assets';
-import './DetailBlog.scss';
+import { Gap, LinkLabel } from '../../components';
+import { useHistory, withRouter } from 'react-router-dom';
+import axios from 'axios';
+import showFormattedDate from '../../utils/dateformat';
 
-const DetailBlog = () => {
-  return (
-    <div className='detail-page'>
-        <img className='content-image' src={ContentBlog} alt="detail-post" />
-        <h2 className='content-title'>Title Blog</h2>
-        <span className='content-author'>Author - Date Post</span>
-        <p content-body>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic similique, reprehenderit eligendi harum aspernatur porro obcaecati possimus! Excepturi laboriosam voluptates similique suscipit consequuntur, maiores veniam eius quis amet harum quaerat.</p>
-    </div>
-  )
+const DetailBlog = (props) => {
+  const [dataPost, setDataPost] = useState({});
+  useEffect(() => {
+    const id = props.match.params.id;
+    axios.get(`http://localhost:5000/v1/blog/post/${id}`)
+    .then(res => {
+        setDataPost(res.data.data);
+    })
+    .catch(err => console.log(err));
+  }, [props])
+  const history = useHistory();
+  if (dataPost.author) {
+    return (
+        <div className='detail-page'>
+            <img className='content-image' src={`http://localhost:5000/${dataPost.image}`} alt="detail-post" />
+            <p className='content-author'>{dataPost.author.name} - {showFormattedDate(dataPost.createdAt)}</p>
+            <p content-body>{dataPost.body}</p>
+            <Gap height={20} />
+            <LinkLabel title="Kembali ke home" onClick={() => history.push('/')} />
+        </div>
+      )
+  }
+
+  return <p>Loading data...</p>
 }
 
-export default DetailBlog;
+export default withRouter(DetailBlog);
