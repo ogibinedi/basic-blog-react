@@ -21,7 +21,7 @@ export const postToAPI = (form) => {
     data.append('body', form.body);
     data.append('image', form.image);
 
-    axios.post('https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post', data, {
+    axios.post('https://obemernapi.herokuapp.com/v1/blog/post', data, {
         headers: {
             'content-type': 'multipart/form-data'
         }
@@ -39,7 +39,7 @@ export const updateToAPI = (form, id) => {
     data.append('body', form.body);
     data.append('image', form.image);
 
-    axios.put(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`, data, {
+    axios.put(`https://obemernapi.herokuapp.com/v1/blog/post/${id}`, data, {
         headers: {
             'content-type': 'multipart/form-data'
         }

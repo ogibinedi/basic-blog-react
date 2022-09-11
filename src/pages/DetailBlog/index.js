@@ -11,7 +11,7 @@ const DetailBlog = (props) => {
   const [dataPost, setDataPost] = useState({});
   useEffect(() => {
     const id = props.match.params.id;
-    axios.get(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`)
+    axios.get(`https://obemernapi.herokuapp.com/v1/blog/post/${id}`)
     .then(res => {
         setDataPost(res.data.data);
     })
@@ -24,7 +24,7 @@ const DetailBlog = (props) => {
         <div className='container-sm'>
             <div className="col-sm-12">
                 { dataPost.image.length > 0 ? (
-                    <img className='content-image' src={`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/${dataPost.image}`} alt="detail-post" width="100%" />
+                    <img className='content-image' src={`https://obemernapi.herokuapp.com/${dataPost.image}`} alt="detail-post" width="100%" />
                 ) : (
                     <img className='content-image' src={defaultImage} alt="detail-post" width="100%" />
                 )}

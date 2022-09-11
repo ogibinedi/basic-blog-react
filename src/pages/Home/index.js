@@ -37,7 +37,7 @@ const Home = () => {
         {
           label: 'Yes',
           onClick: () => {
-            axios.delete(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`)
+            axios.delete(`https://obemernapi.herokuapp.com/v1/blog/post/${id}`)
             .then(res => {
                 dispatch(setDataBlog(counter));
             })
@@ -78,7 +78,7 @@ const Home = () => {
             .map(post => (
                 <BlogItem 
                 key={post._id} 
-                image={`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/${post.image}`}
+                image={`https://obemernapi.herokuapp.com/${post.image}`}
                 title={post.title}
                 name={post.author.name}
                 date={showFormattedDate(post.createdAt)}

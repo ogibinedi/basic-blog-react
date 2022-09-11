@@ -36,12 +36,12 @@ const CreateBlog = (props) => {
     const id = props.match.params.id;
     if (id) {
         setIsUpdate(true);
-        axios.get(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`)
+        axios.get(`https://obemernapi.herokuapp.com/v1/blog/post/${id}`)
         .then(res => {
             const data = res.data.data;
             dispatch(setForm('title', data.title));
             dispatch(setForm('body', data.body));
-            dispatch(setImgPreview(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/${data.image}`));
+            dispatch(setImgPreview(`https://obemernapi.herokuapp.com/${data.image}`));
         })
         .catch(err => console.log('error: ', err))
     }
