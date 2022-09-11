@@ -8,6 +8,7 @@ import { postToAPI, setForm, setImgPreview, updateToAPI } from '../../config/red
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { FaArrowLeft } from 'react-icons/fa';
 
 
 const CreateBlog = (props) => {
@@ -35,12 +36,12 @@ const CreateBlog = (props) => {
     const id = props.match.params.id;
     if (id) {
         setIsUpdate(true);
-        axios.get(`http://localhost:5000/v1/blog/post/${id}`)
+        axios.get(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`)
         .then(res => {
             const data = res.data.data;
             dispatch(setForm('title', data.title));
             dispatch(setForm('body', data.body));
-            dispatch(setImgPreview(`http://localhost:5000/${data.image}`));
+            dispatch(setImgPreview(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/${data.image}`));
         })
         .catch(err => console.log('error: ', err))
     }
@@ -67,12 +68,18 @@ const CreateBlog = (props) => {
     <div className="container">
         <ToastContainer />
         <div className='form-control'>
-            <LinkLabel title="Kembali ke home" onClick={() => history.push('/')} />
+            <LinkLabel 
+            title={
+                <span>
+                <FaArrowLeft /> <span>Kembali ke home</span>
+                </span>
+            } 
+            onClick={() => history.push('/')} />
             <p className='label-create-post'>{isUpdate ? 'Update Blog Post' : 'Create New Blog Post'}</p>
             <Input label="Post title" value={title} onChange={(e) => dispatch(setForm('title', e.target.value))}/>
             <p>Upload Image</p>
             <Upload onChange={(e) => onImageUpload(e)} img={imgPreview} />
-            <TextArea value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
+            <TextArea label="Post Body" value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
             <Gap height={20} />
             <div className="button-save">
                 <Button title={isUpdate ? 'Update' : 'Save'} onClick={onSubmit}/>

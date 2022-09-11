@@ -4,5 +4,6 @@ import Gap from "./gap";
 import LinkLabel from "./link";
 import Upload from "./upload";
 import TextArea from "./textarea";
+import Search from "./search";
 
-export {Input, Button, Gap, LinkLabel, Upload, TextArea};
+export {Input, Search, Button, Gap, LinkLabel, Upload, TextArea};

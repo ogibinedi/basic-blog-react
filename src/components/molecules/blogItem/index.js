@@ -2,6 +2,8 @@ import React from 'react';
 // import './blogItem.scss';
 import { Button } from '../../atoms';
 import { useHistory } from 'react-router-dom';
+import { defaultImage } from '../../../assets';
+
 
 const BlogItem = ({ image, title, name, date, body, _id, onDelete}) => {
   const history = useHistory();
@@ -9,7 +11,7 @@ const BlogItem = ({ image, title, name, date, body, _id, onDelete}) => {
     <>
         <div className='col'>
             <div className="card shadow-sm">
-                <img className='bd-placeholder-img card-img-top' src={image} width="100%" height="225" alt="featureImage" />
+                <img className='bd-placeholder-img card-img-top' src={image.length > 0 ? image :  defaultImage} width="100%" height="225" alt="featureImage" />
                 <div className="card-body">
                   <p style={{ fontWeight: 'bold', color: 'grey'}}>{title.substring(0, 30)}...</p>
                   <p className="card-text">{body.substring(0, 50)}...</p>
@@ -22,7 +24,7 @@ const BlogItem = ({ image, title, name, date, body, _id, onDelete}) => {
                   </div>
                 </div>
                 <div className="card-footer">
-                   <Button title="Read more..." onClick={() => history.push(`/detail-blog/${_id}`)} /> 
+                   <Button className="btn btn-info btn-sm float-end" title="Read more..." onClick={() => history.push(`/detail-blog/${_id}`)} /> 
                 </div>
             </div>
         </div>

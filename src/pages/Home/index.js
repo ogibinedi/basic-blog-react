@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BlogItem, Button, Gap } from '../../components';
+import { BlogItem, Button, Gap, Search } from '../../components';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setDataBlog } from '../../config/redux/action';
@@ -11,16 +11,15 @@ import axios from 'axios';
 import { FaFileAlt, FaPlus } from 'react-icons/fa';
 
 const Home = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [counter, setCounter] = useState(1)
   const {dataBlog, page} = useSelector(state => state.homeReducer);
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(setDataBlog(counter))
   }, [dispatch, counter]);
-
-
-  const history = useHistory();
 
   const prev = () => {
     setCounter(counter <= 1 ? 1 : counter - 1);
@@ -38,7 +37,7 @@ const Home = () => {
         {
           label: 'Yes',
           onClick: () => {
-            axios.delete(`http://localhost:5000/v1/blog/post/${id}`)
+            axios.delete(`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/v1/blog/post/${id}`)
             .then(res => {
                 dispatch(setDataBlog(counter));
             })
@@ -54,14 +53,32 @@ const Home = () => {
   }
 
   return (
-    <main>
-        <button className='btn btn-success btn-md 'onClick={() => history.push('/create-blog') } style={{ position: 'absolute'}}><FaPlus /> &nbsp; Create Blog </button>
-        <Gap height={50} />
+    <div className='album py-5 bg-light'>
+        <div className='container'>
+            <Search placeholder="Masukan Judul Artikel yang kamu cari"
+            onChange={(event) => {
+                setSearchTerm(event.target.value);
+            }}
+        />
+        <Gap height={100} />
+        <button className='btn btn-success btn-md text-right'onClick={() => history.push('/create-blog') } style={{ position: 'absolute'}}><FaPlus /> &nbsp; Create Blog </button>
+        <Gap height={70} />
         <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            {dataBlog.length !== 0 ? dataBlog.map(post => (
+            
+            {
+                // eslint-disable-next-line array-callback-return
+                dataBlog.length !== 0 ? dataBlog.filter((search) => {
+                if(searchTerm === ""){
+                    return search;
+                }
+                if(search.title.toLowerCase().includes(searchTerm.toLowerCase())){
+                    return search;
+                }
+            })
+            .map(post => (
                 <BlogItem 
                 key={post._id} 
-                image={`http://localhost:5000/${post.image}`}
+                image={`https://basic-blog-react-93j36ut7v-ogibinedi.vercel.app/${post.image}`}
                 title={post.title}
                 name={post.author.name}
                 date={showFormattedDate(post.createdAt)}
@@ -75,13 +92,15 @@ const Home = () => {
                 </div>}
         </div>
         <div style={{ textAlign: 'center', display: 'flex', justifyContent: 'center', marginTop: '100px'}}>
-            <Button title="Previous" onClick={prev}/>
+            <Button className="btn btn-warning" title="Previous" onClick={prev}/>
             <Gap width={20} />
             <p className='text-page'>{page.currentPage + "/" + page.totalPage}</p>
             <Gap width={20} />
-            <Button title="Next" onClick={next} />
+            <Button className="btn btn-warning" title="Next" onClick={next} />
         </div>
-    </main>
+        </div>
+    </div>
+        
   );
 };
 
