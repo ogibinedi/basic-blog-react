@@ -8,6 +8,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { defaultImage } from '../../assets';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
+import rehypeHighLight from 'rehype-highlight';
 
 const DetailBlog = (props) => {
   const [dataPost, setDataPost] = useState({});
@@ -34,7 +35,7 @@ const DetailBlog = (props) => {
                 <p className='content-author'>{dataPost.author.name} - {showFormattedDate(dataPost.createdAt)}</p>
                 <p content-body>
                     <ReactMarkdown
-                        rehypePlugins={[rehypeRaw]}
+                        rehypePlugins={[rehypeRaw, rehypeHighLight]}
                         children={dataPost.body}
                     />
                 </p>
@@ -50,7 +51,7 @@ const DetailBlog = (props) => {
         </div>
     )
   } else {
-    return (<div>Loading data...</div>)
+    return (<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', fontSize: '24px', color: 'green'}}>Loading data...</div>)
   }
   
 }
