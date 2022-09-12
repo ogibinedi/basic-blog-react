@@ -6,6 +6,8 @@ import axios from 'axios';
 import showFormattedDate from '../../utils/dateformat';
 import { FaArrowLeft } from 'react-icons/fa';
 import { defaultImage } from '../../assets';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 const DetailBlog = (props) => {
   const [dataPost, setDataPost] = useState({});
@@ -28,9 +30,14 @@ const DetailBlog = (props) => {
                 ) : (
                     <img className='content-image' src={defaultImage} alt="detail-post" width="100%" />
                 )}
-                <h3>{dataPost.title}</h3>
+                <h3 className='content-title'>{dataPost.title}</h3>
                 <p className='content-author'>{dataPost.author.name} - {showFormattedDate(dataPost.createdAt)}</p>
-                <p content-body>{dataPost.body}</p>
+                <p content-body>
+                    <ReactMarkdown
+                        rehypePlugins={[rehypeRaw]}
+                        children={dataPost.body}
+                    />
+                </p>
                 <Gap height={20} />
                 <LinkLabel 
                 title={

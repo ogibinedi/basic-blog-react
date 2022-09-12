@@ -78,11 +78,11 @@ const CreateBlog = (props) => {
             <p className='label-create-post'>{isUpdate ? 'Update Blog Post' : 'Create New Blog Post'}</p>
             <Input label="Post title" value={title} onChange={(e) => dispatch(setForm('title', e.target.value))}/>
             <p>Upload Image</p>
-            <Upload onChange={(e) => onImageUpload(e)} img={imgPreview} />
-            <TextArea label="Post Body" value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
+            <Upload className="form-control" onChange={(e) => onImageUpload(e)} img={imgPreview} />
+            <TextArea placeholder="Teks area ini mendukung rich text editor menggunakan markdown sintaks" label="Post Body" value={body} onChange={(e) => dispatch(setForm('body', e.target.value))}/>
             <Gap height={20} />
             <div className="button-save">
-                <Button title={isUpdate ? 'Update' : 'Save'} onClick={onSubmit}/>
+                <Button className="btn btn-primary" title={isUpdate ? 'Update' : 'Save'} onClick={onSubmit}/>
             </div>
         </div>
     </div>

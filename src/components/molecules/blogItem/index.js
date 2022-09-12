@@ -3,6 +3,8 @@ import React from 'react';
 import { Button } from '../../atoms';
 import { useHistory } from 'react-router-dom';
 import { defaultImage } from '../../../assets';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 
 const BlogItem = ({ image, title, name, date, body, _id, onDelete}) => {
@@ -14,7 +16,11 @@ const BlogItem = ({ image, title, name, date, body, _id, onDelete}) => {
                 <img className='bd-placeholder-img card-img-top' src={image.length > 0 ? image :  defaultImage} width="100%" height="225" alt="featureImage" />
                 <div className="card-body">
                   <p style={{ fontWeight: 'bold', color: 'grey'}}>{title.substring(0, 30)}...</p>
-                  <p className="card-text">{body.substring(0, 50)}...</p>
+                  <p className="card-text">
+                    <ReactMarkdown
+                        rehypePlugins={[rehypeRaw]}
+                        children={body.substring(0, 30) + '...'}
+                    /></p>
                   <div className="d-flex justify-content-between align-items-center">
                     <div className="btn-group">
                       <button onClick={() => onDelete(_id)} type="button" className="btn btn-sm btn-outline-danger">Delete</button>
