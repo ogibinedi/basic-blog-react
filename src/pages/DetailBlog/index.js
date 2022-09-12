@@ -8,7 +8,9 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { defaultImage } from '../../assets';
 import ReactMarkdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
-import rehypeHighLight from 'rehype-highlight';
+import remarkGfm from 'remark-gfm';
+import {Prism as SyntaxHighlighter} from 'react-syntax-highlighter'
+import {dark} from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 const DetailBlog = (props) => {
   const [dataPost, setDataPost] = useState({});
@@ -35,8 +37,26 @@ const DetailBlog = (props) => {
                 <p className='content-author'>{dataPost.author.name} - {showFormattedDate(dataPost.createdAt)}</p>
                 <p content-body>
                     <ReactMarkdown
-                        rehypePlugins={[rehypeRaw, rehypeHighLight]}
+                        rehypePlugins={[rehypeRaw, remarkGfm]}
                         children={dataPost.body}
+                        components={{
+                          code({node, inline, className, children, ...props}) {
+                            const match = /language-(\w+)/.exec(className || '')
+                            return !inline && match ? (
+                              <SyntaxHighlighter
+                                children={String(children).replace(/\n$/, '')}
+                                style={dark}
+                                language={match[1]}
+                                PreTag="div"
+                                {...props}
+                              />
+                            ) : (
+                              <code className={className} {...props}>
+                                {children}
+                              </code>
+                            )
+                          }
+                        }}
                     />
                 </p>
                 <Gap height={20} />
